@@ -1,5 +1,13 @@
 # POO-3
 
+# Participantes:
+
+
+Malu de Faria Neves Bezerra
+
+Pedro Marques Bezerra dos Santos
+
+
 # Labirinto do Aventureiro
 
 ## Descrição
