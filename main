@@ -94,6 +94,18 @@ def main():
         # Verifica se o jogador recolheu todos os tesouros
         if not labirinto.tesouros:
             print(f"\nParabéns, {aventureiro.get_nome()}! Você coletou todos os tesouros e venceu o jogo!")
+            print("              $$$$$$$$      $$$$$$$$$              ")
+            print("            $$$$$$$$$$$$   $$$$$$$  $$$$           ")
+            print("           $$$$$$$$$$$$$$$$$$$$$$$$  $$$           ")
+            print("           $$$$$$$$$$$$$$$$$$$$$$$$  $$$           ")
+            print("           $$$$$$$$$$$$$$$$$$$$$$$$  $$$           ")
+            print("            $$$$$$$$$$$$$$$$$$$$$$  $$$            ")
+            print("              $$$$$$$$$$$$$$$$$$$$$$$              ")
+            print("                 $$$$$$$$$$$$$$$$$                 ")
+            print("                   $$$$$$$$$$$$$                   ")
+            print("                      $$$$$$$                      ")
+            print("                        $$$                        ")
+            print("                         $                         ")    
             break
 
 if __name__ == "__main__":
