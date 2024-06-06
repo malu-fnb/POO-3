@@ -1,6 +1,3 @@
-import random
-import Tesouro 
-
 class Labirinto:
     def __init__(self, linhas, colunas):
         self.linhas = linhas
@@ -8,8 +5,9 @@ class Labirinto:
         self.estrutura = [['.' for _ in range(colunas)] for _ in range(linhas)]
         self.tesouros = []
         self.perigos = []
+        self.paredes = []
 
-    def gerar_labirinto(self, quantidade_tesouros, quantidade_perigos):
+    def gerar_labirinto(self, quantidade_tesouros, quantidade_perigos, quantidade_paredes):
         for _ in range(quantidade_tesouros):
             while True:
                 linha = random.randint(0, self.linhas - 1)
@@ -26,6 +24,14 @@ class Labirinto:
                 if (linha, coluna) != (0, 0) and self.estrutura[linha][coluna] == '.':
                     perigo = Perigo((linha, coluna), 5)
                     self.adicionar_perigo(perigo)
+                    break
+
+        for _ in range(quantidade_paredes):
+            while True:
+                linha = random.randint(0, self.linhas - 1)
+                coluna = random.randint(0, self.colunas - 1)
+                if (linha, coluna) != (0, 0) and self.estrutura[linha][coluna] == '.':
+                    self.adicionar_parede((linha, coluna))
                     break
 
     def adicionar_tesouro(self, tesouro):
@@ -48,15 +54,22 @@ class Labirinto:
         linha, coluna = perigo.get_posicao()
         self.estrutura[linha][coluna] = '.'
 
+    def adicionar_parede(self, posicao):
+        self.paredes.append(posicao)
+        linha, coluna = posicao
+        self.estrutura[linha][coluna] = '-'
+
     def exibir_mapa(self, aventureiro):
         for i in range(self.linhas):
             for j in range(self.colunas):
                 if (i, j) == aventureiro.get_posicao_atual():
-                    print('A', end=' ')  # Representa o aventureiro com 'A'
-                elif (i, j) in [t.get_posicao() for t in self.tesouros]:
-                    print('T', end=' ')  # Representa os tesouros com 'T'
-                elif (i, j) in [p.get_posicao() for p in self.perigos]:
-                    print('*', end=' ')  # Representa as armadilhas com '*'
+                    print('嘿', end=' ')  # Representa o aventureiro com '嘿'
+                elif self.estrutura[i][j] == 'T':
+                    print('✧', end=' ')  # Representa os tesouros com '✧'
+                elif self.estrutura[i][j] == '*':
+                    print('۝', end=' ')  # Representa as armadilhas com '۝'
+                elif self.estrutura[i][j] == '-':
+                    print('-', end=' ')  # Representa as paredes com '-'
                 else:
-                    print('.', end=' ')  # Representa células vazias com '.'
+                    print('*', end=' ')  # Representa células vazias com '*'
             print()
