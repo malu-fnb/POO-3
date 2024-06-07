@@ -7,6 +7,10 @@ Malu de Faria Neves Bezerra
 
 Pedro Marques Bezerra dos Santos
 
+Renan Ribeiro Duarte
+
+Pedro Henrique Afonso dos Santos
+
 
 # Labirinto do Aventureiro
 
