@@ -1,18 +1,11 @@
-def pedra_papel_tesoura():
-    opcoes = ['pedra', 'papel', 'tesoura']
-    escolha_maquina = random.choice(opcoes)
-    escolha_jogador = input("Vamos jogar Pedra, Papel e Tesoura! Escolha: pedra, papel ou tesoura: ").lower()
+class PomoDeOuro:
+    def __init__(self, linhas, colunas):
+        self.posicao = (random.randint(0, linhas - 1), random.randint(0, colunas - 1))
+        self.linhas = linhas
+        self.colunas = colunas
 
-    while escolha_jogador not in opcoes:
-        escolha_jogador = input("Escolha inválida. Tente novamente: pedra, papel ou tesoura: ").lower()
+    def mover(self):
+        self.posicao = (random.randint(0, self.linhas - 1), random.randint(0, self.colunas - 1))
 
-    print(f"Máquina escolheu: {escolha_maquina}")
-
-    if escolha_jogador == escolha_maquina:
-        return "Empate"
-    elif (escolha_jogador == 'pedra' and escolha_maquina == 'tesoura') or \
-         (escolha_jogador == 'papel' and escolha_maquina == 'pedra') or \
-         (escolha_jogador == 'tesoura' and escolha_maquina == 'papel'):
-        return "Você ganhou"
-    else:
-        return "Você perdeu"
+    def get_posicao(self):
+        return self.posicao
