@@ -1,44 +1,42 @@
 # POO-3
 
-# Participantes:
+## Participantes:
 
+- Malu de Faria Neves Bezerra
+- Pedro Marques Bezerra dos Santos
+- Renan Ribeiro Duarte
+- Pedro Henrique Afonso dos Santos
 
-Malu de Faria Neves Bezerra
+## Labirinto do Aventureiro
 
-Pedro Marques Bezerra dos Santos
-
-Renan Ribeiro Duarte
-
-Pedro Henrique Afonso dos Santos
-
-
-# Labirinto do Aventureiro
-
-## Descrição
+### Descrição
 
 Este é um jogo de labirinto onde o jogador controla um aventureiro que deve coletar todos os tesouros enquanto evita armadilhas. O jogo oferece diferentes níveis de dificuldade e inclui um sistema de energia que se esgota a cada movimento. Quando a energia se esgota, o jogador joga Pedra, Papel e Tesoura contra a máquina para recuperar energia.
 
-## Requisitos do Jogo
+### Requisitos do Jogo
 
-O jogo é composto por quatro classes principais:
+O jogo é composto por cinco classes principais:
 - **Aventureiro**: Representa o jogador no jogo.
 - **Tesouro**: Representa os tesouros que podem ser coletados no jogo.
 - **Perigo**: Representa as armadilhas que o jogador deve evitar.
+- **PomoDeOuro**: Representa o objeto que o jogador deve capturar para vencer o jogo.
 - **Labirinto**: Representa a estrutura do labirinto e contém a lógica principal do jogo.
 
-### Classes e Atributos
+#### Classes e Atributos
 
-#### Aventureiro
+##### Aventureiro
 - **Atributos**:
   - `nome`: Nome do jogador.
   - `posicao_atual`: Posição atual do jogador no labirinto.
   - `tesouros_coletados`: Lista de tesouros coletados pelo jogador.
+  - `vidas`: Quantidade de vidas do jogador.
 - **Métodos**:
   - Getters e setters para os atributos.
   - `mover(direcao, labirinto)`: Move o jogador na direção especificada.
   - `coletar_tesouro(tesouro)`: Adiciona o tesouro à lista de tesouros coletados.
+  - `perder_vida()`: Reduz o número de vidas do jogador.
 
-#### Tesouro
+##### Tesouro
 - **Atributos**:
   - `nome`: Nome do tesouro.
   - `posicao`: Posição do tesouro no labirinto.
@@ -46,36 +44,44 @@ O jogo é composto por quatro classes principais:
 - **Métodos**:
   - Getters e setters para os atributos.
 
-#### Perigo
+##### Perigo
 - **Atributos**:
   - `posicao`: Posição da armadilha no labirinto.
   - `dano`: Dano potencial da armadilha.
 - **Métodos**:
   - Getters e setters para os atributos.
 
-#### Labirinto
+##### PomoDeOuro
+- **Atributos**:
+  - `posicao`: Posição do Pomo de Ouro no labirinto.
+- **Métodos**:
+  - `mover()`: Move o Pomo de Ouro para uma nova posição aleatória.
+
+##### Labirinto
 - **Atributos**:
   - `linhas`: Número de linhas do labirinto.
   - `colunas`: Número de colunas do labirinto.
   - `estrutura`: Estrutura do labirinto (lista de listas).
   - `tesouros`: Lista de tesouros no labirinto.
   - `perigos`: Lista de armadilhas no labirinto.
+  - `pomo_de_ouro`: Instância do Pomo de Ouro no labirinto.
 - **Métodos**:
   - `gerar_labirinto(quantidade_tesouros, quantidade_perigos)`: Gera o labirinto com tesouros e armadilhas.
   - `adicionar_tesouro(tesouro)`: Adiciona um tesouro ao labirinto.
   - `remover_tesouro(tesouro)`: Remove um tesouro do labirinto.
   - `adicionar_perigo(perigo)`: Adiciona uma armadilha ao labirinto.
   - `remover_perigo(perigo)`: Remove uma armadilha do labirinto.
-  - `exibir_mapa(aventureiro)`: Exibe o mapa do labirinto.
+  - `exibir_mapa(aventureiro, energia, proximidade_armadilha)`: Exibe o mapa do labirinto.
+  - `verificar_armadilhas_proximas(posicao)`: Verifica se há armadilhas próximas à posição do jogador.
 
-## Como Jogar
+### Como Jogar
 
 1. **Início do Jogo**: Ao iniciar o jogo, você será solicitado a inserir seu nome e escolher um nível de dificuldade: fácil, médio ou difícil.
 2. **Movimentação**: Use as teclas `w`, `s`, `a` e `d` para mover o aventureiro pelo labirinto.
 3. **Energia**: Cada movimento consome energia. Quando a energia se esgota, você joga Pedra, Papel e Tesoura para recuperar energia.
-4. **Objetivo**: Coletar todos os tesouros (T) e evitar as armadilhas (*). Você vence ao coletar todos os tesouros.
+4. **Objetivo**: Coletar todos os tesouros (T) e evitar as armadilhas (*). Você vence ao capturar o Pomo de Ouro (P) ou coletar todos os tesouros.
 
-## Exemplo de Execução
+### Exemplo de Execução
 
 ```
 Bem-vindo ao Labirinto!
@@ -84,7 +90,7 @@ Regras:
 1. Você começa com uma certa quantidade de energia, que diminui a cada movimento.
 2. Quando a energia acabar, você jogará Pedra, Papel e Tesoura para recuperá-la.
 3. Colete todos os tesouros (✧) para vencer o jogo.
-4. Evite cair nas armadilhas (۝), caso contrário, é Game Over.
+4. Evite cair nas armadilhas (۝), caso contrário, você perderá vidas.
 5. Movimente-se usando 'w' (cima), 's' (baixo), 'a' (esquerda) e 'd' (direita).
 Boa sorte!
 
@@ -93,15 +99,15 @@ Qual nível deseja jogar? (fácil(f), médio(m), difícil(d)): f
 Mapa do Labirinto (Energia: 10):
 嘿 * * * * * 
 * * * * * ✧ 
-* * * * ۝ ͒ * 
+* * * * ۝ * 
 * * * * * * 
-* * ۝ ͒ * * * 
+* * ۝ * * * 
 * * * * * ✧ 
 
 Para onde deseja se mover, Jogador1? (cima(w), baixo(s), esquerda(a), direita(d)): d
 ```
 
-## Código Fonte
+### Código Fonte
 
 ```python
 import random
@@ -111,6 +117,7 @@ class Aventureiro:
         self.nome = nome
         self.posicao_atual = (0, 0)
         self.tesouros_coletados = []
+        self.vidas = 3
 
     def get_nome(self):
         return self.nome
@@ -144,6 +151,12 @@ class Aventureiro:
     def coletar_tesouro(self, tesouro):
         self.tesouros_coletados.append(tesouro)
 
+    def perder_vida(self):
+        self.vidas -= 1
+
+    def get_vidas(self):
+        return self.vidas
+
 
 class Tesouro:
     def __init__(self, nome, posicao, valor):
@@ -173,6 +186,17 @@ class Perigo:
         return self.dano
 
 
+class PomoDeOuro:
+    def __init__(self, posicao):
+        self.posicao = posicao
+
+    def get_posicao(self):
+        return self.posicao
+
+    def mover(self):
+        self.posicao = (random.randint(0, 9), random.randint(0, 9))
+
+
 class Labirinto:
     def __init__(self, linhas, colunas):
         self.linhas = linhas
@@ -180,13 +204,16 @@ class Labirinto:
         self.estrutura = [['.' for _ in range(colunas)] for _ in range(linhas)]
         self.tesouros = []
         self.perigos = []
+        self.pomo_de_ouro = PomoDeOuro((random.randint(0, linhas-1), random.randint(0, colunas-1)))
 
     def gerar_labirinto(self, quantidade_tesouros, quantidade_perigos):
         for _ in range(quantidade_tesouros):
             while True:
                 linha = random.randint(0, self.linhas - 1)
                 coluna = random.randint(0, self.colunas - 1)
-                if (linha, coluna) != (0, 0) and self.estrutura[linha][coluna] == '.':
+                if (
+
+linha, coluna) != (0, 0) and self.estrutura[linha][coluna] == '.':
                     tesouro = Tesouro("Tesouro", (linha, coluna), 10)
                     self.adicionar_tesouro(tesouro)
                     break
@@ -220,16 +247,27 @@ class Labirinto:
         linha, coluna = perigo.get_posicao()
         self.estrutura[linha][coluna] = '.'
 
-    def exibir_mapa(self, aventureiro):
+    def exibir_mapa(self, aventureiro, energia, proximidade_armadilha):
         for i in range(self.linhas):
             for j in range(self.colunas):
                 if (i, j) == aventureiro.get_posicao_atual():
-                    print
-
-('A', end=' ')
+                    print('A', end=' ')
+                elif (i, j) == self.pomo_de_ouro.get_posicao():
+                    print('P', end=' ')
                 else:
                     print(self.estrutura[i][j], end=' ')
             print()
+        print(f"Energia: {energia}, Vidas: {aventureiro.get_vidas()}")
+        if proximidade_armadilha:
+            print("Cuidado! Há uma armadilha próxima!")
+
+    def verificar_armadilhas_proximas(self, posicao):
+        linha, coluna = posicao
+        for perigo in self.perigos:
+            p_linha, p_coluna = perigo.get_posicao()
+            if abs(p_linha - linha) <= 1 and abs(p_coluna - coluna) <= 1:
+                return True
+        return False
 
 def pedra_papel_tesoura():
     opcoes = ['pedra', 'papel', 'tesoura']
@@ -243,9 +281,9 @@ def pedra_papel_tesoura():
 
     if escolha_jogador == escolha_maquina:
         return "Empate"
-    elif (escolha_jogador == 'pedra' and escolha_maquina == 'tesoura') or \
-         (escolha_jogador == 'papel' and escolha_maquina == 'pedra') or \
-         (escolha_jogador == 'tesoura' and escolha_maquina == 'papel'):
+    elif (escolha_jogador == 'pedra' e escolha_maquina == 'tesoura') or \
+         (escolha_jogador == 'papel' e escolha_maquina == 'pedra') or \
+         (escolha_jogador == 'tesoura' e escolha_maquina == 'papel'):
         return "Você ganhou"
     else:
         return "Você perdeu"
@@ -257,7 +295,7 @@ def main():
     print("1. Você começa com uma certa quantidade de energia, que diminui a cada movimento.")
     print("2. Quando a energia acabar, você jogará Pedra, Papel e Tesoura para recuperá-la.")
     print("3. Colete todos os tesouros (T) para vencer o jogo.")
-    print("4. Evite cair nas armadilhas (*), caso contrário, é Game Over.")
+    print("4. Evite cair nas armadilhas (*), caso contrário, você perderá vidas.")
     print("5. Movimente-se usando 'w' (cima), 's' (baixo), 'a' (esquerda) e 'd' (direita).")
     print("Boa sorte!\n")
 
@@ -283,8 +321,9 @@ def main():
     energia = energia_inicial
 
     while True:
+        proximidade_armadilha = labirinto.verificar_armadilhas_proximas(aventureiro.get_posicao_atual())
         print(f"\nMapa do Labirinto (Energia: {energia}):")
-        labirinto.exibir_mapa(aventureiro)
+        labirinto.exibir_mapa(aventureiro, energia, proximidade_armadilha)
 
         direcao = input(f"Para onde deseja se mover, {aventureiro.get_nome()}? (cima(w), baixo(s), esquerda(a), direita(d)): ").lower()
         while direcao not in ['w', 's', 'a', 'd']:
@@ -293,6 +332,10 @@ def main():
         aventureiro.mover(direcao, labirinto)
 
         nova_posicao = aventureiro.get_posicao_atual()
+
+        if nova_posicao == labirinto.pomo_de_ouro.get_posicao():
+            print(f"Parabéns, {aventureiro.get_nome()}! Você capturou o Pomo de Ouro e venceu o jogo!")
+            break
 
         tesouro_encontrado = None
         for tesouro in labirinto.tesouros:
@@ -310,8 +353,11 @@ def main():
                 perigo_encontrado = perigo
                 break
         if perigo_encontrado:
-            print("Você caiu em uma armadilha! Game over!")
-            exit()
+            print("Você caiu em uma armadilha!")
+            aventureiro.perder_vida()
+            if aventureiro.get_vidas() == 0:
+                print("Game over!")
+                exit()
 
         energia -= 1
 
@@ -336,7 +382,7 @@ if __name__ == "__main__":
     main()
 ```
 
-## Como Executar
+### Como Executar
 
 1. **Clone o Repositório**:
    ```bash
